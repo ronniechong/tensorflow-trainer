@@ -126,6 +126,5 @@ dmypy.json
 images/
 checkpoints/
 uploads/
-config.ini
 node_modules/
 model/

@@ -12,22 +12,19 @@ from tensorflow.keras.preprocessing import image
 import numpy as np
 import os
 import base64
-import configparser
-
-config = configparser.ConfigParser()
-config.read('./config.ini')
+from decouple import config
 
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
 app = Flask(__name__)
-app.secret_key = config.get('APP', 'SECRETKEY')
+app.secret_key = config('SECRETKEY')
 CORS(app)
 # run_with_ngrok(app)
 # https://github.com/gstaff/flask-ngrok/issues/2
-category_names = config.get('CATEGORIES', 'LIST').split(',')
+category_names = config('CATEGORIES').split(',')
 nb_categories = len(category_names)
 
-type = config.get('MODE', 'TYPE')
+type = config('MODE')
 
 if type == 'checkpoint':
   # Load via checkpoints
@@ -119,4 +116,4 @@ def predictBase64():
   return 'nothing to see here'
 
 if __name__ == '__main__':
-  app.run()
+  app.run(host='0.0.0.0')
