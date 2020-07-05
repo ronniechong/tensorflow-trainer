@@ -123,3 +123,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+images/
+checkpoints/
+uploads/
+config.ini
+node_modules/
+model/
