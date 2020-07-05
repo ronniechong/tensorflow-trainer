@@ -14,17 +14,16 @@ import os
 import base64
 import configparser
 
+config = configparser.ConfigParser()
+config.read('./config.ini')
+
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
 app = Flask(__name__)
-app.secret_key = 'super secret key'
+app.secret_key = config.get('APP', 'SECRETKEY')
 CORS(app)
 # run_with_ngrok(app)
 # https://github.com/gstaff/flask-ngrok/issues/2
-
-# category_names = sorted(os.listdir('./images/train'))
-config = configparser.ConfigParser()
-config.read('./config.ini')
 category_names = config.get('CATEGORIES', 'LIST').split(',')
 nb_categories = len(category_names)
 
