@@ -1,3 +1,6 @@
+from dotenv import load_dotenv
+load_dotenv()
+
 from flask import Flask, flash, request, redirect, url_for
 from flask_ngrok import run_with_ngrok
 from flask_cors import CORS
@@ -12,19 +15,18 @@ from tensorflow.keras.preprocessing import image
 import numpy as np
 import os
 import base64
-from decouple import config
 
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
 app = Flask(__name__)
-app.secret_key = config('SECRETKEY')
+app.secret_key = os.getenv('SECRETKEY')
 CORS(app)
 # run_with_ngrok(app)
 # https://github.com/gstaff/flask-ngrok/issues/2
-category_names = config('CATEGORIES').split(',')
+category_names = os.getenv('CATEGORIES').split(',')
 nb_categories = len(category_names)
 
-type = config('MODE')
+type = os.getenv('MODE')
 
 if type == 'checkpoint':
   # Load via checkpoints
