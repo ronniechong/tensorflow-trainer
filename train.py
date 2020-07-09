@@ -74,7 +74,7 @@ def predictFileUpload():
 
       class_prob=model.predict(img)
       y_pred = np.argmax(class_prob, axis=1)
-      count = 0;
+      count = 0
       for a in class_prob[0]:
         # print(category_names[count] + ': ' + "{:.2f}".format(a))
         count = count + 1
